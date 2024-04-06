@@ -51,6 +51,7 @@ namespace library.Controllers
 
         //POST api/books
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<BookReadDto>> CreateBook(BookCreateDto BookCreateDto)
         {
             var bookModel = _mapper.Map<Book>(BookCreateDto);
@@ -66,6 +67,7 @@ namespace library.Controllers
 
         //PUT api/books/{id}
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult> UpdateBook(int id, BookUpdateDto BookUpdateDto)
         {
             var bookModelFromRepo = await _repository.GetBookById(id);
@@ -85,6 +87,7 @@ namespace library.Controllers
 
         //PATCH api/books/{id}
         [HttpPatch("{id}")]
+        [Authorize]
         public async Task<ActionResult> PartialBookUpdate(int id, JsonPatchDocument<BookUpdateDto> patchDoc)
         {
             var bookModelFromRepo = await _repository.GetBookById(id);
@@ -112,6 +115,7 @@ namespace library.Controllers
 
         //DELETE api/books/{id}
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteBook(int id)
         {
             var bookModelFromRepo = await _repository.GetBookById(id);
